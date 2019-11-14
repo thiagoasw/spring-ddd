@@ -8,7 +8,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/query
+    url: jdbc:postgresql://localhost:5432/domain
     username: postgres
     password: p@123
 
@@ -24,8 +24,6 @@ spring:
         format_sql: true
 
   cloud:
-    bus:
-      enabled: false
     stream:
       bindings:
         output:

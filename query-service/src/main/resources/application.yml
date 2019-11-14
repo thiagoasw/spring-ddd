@@ -24,8 +24,6 @@ spring:
         format_sql: true
         
   cloud:
-    bus:
-      enabled: false
     stream:
       bindings:
         input:
