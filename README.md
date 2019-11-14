@@ -1,2 +1,1 @@
-# spring-ddd
- 
+# Spring with DDD

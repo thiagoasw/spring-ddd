@@ -1,0 +1,32 @@
+server:
+  port: 8180
+  
+spring:  
+
+  jmx:
+    enabled: false
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/query
+    username: postgres
+    password: p@123
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show-sql: true
+        format_sql: true
+
+  cloud:
+    bus:
+      enabled: false
+    stream:
+      bindings:
+        output:
+          destination: spring.ddd
