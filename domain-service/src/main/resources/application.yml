@@ -13,7 +13,7 @@ spring:
     password: p@123
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     open-in-view: false
     generate-ddl: false
     hibernate:

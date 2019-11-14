@@ -5,9 +5,11 @@ import static lombok.AccessLevel.PROTECTED;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 import org.springframework.data.util.ProxyUtils;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,13 +22,18 @@ import lombok.NoArgsConstructor;
  */
 @MappedSuperclass
 @NoArgsConstructor(access = PROTECTED)
-public abstract class AbstractEntity<ID extends DomainObjectId> implements IdentifiableDomainObject<ID> {
+public abstract class AbstractEntity<ID extends DomainObjectId>
+    implements IdentifiableDomainObject<ID>, ConcurrencySafeDomainObject {
 
     private static final long serialVersionUID = -3123692781951371785L;
 
     @Id
     @JsonProperty("id")
     private ID id;
+
+    @Version
+    @Nullable
+    private Long version;
 
     /**
      * Copy constructor
@@ -54,6 +61,11 @@ public abstract class AbstractEntity<ID extends DomainObjectId> implements Ident
     }
 
     @Override
+    public Long version() {
+        return version;
+    }
+
+    @Override
     public boolean equals(Object obj) {
 
         if (obj == this)
@@ -63,7 +75,7 @@ public abstract class AbstractEntity<ID extends DomainObjectId> implements Ident
             return false;
 
         var other = (AbstractEntity<?>) obj;
-        
+
         return id != null && id.equals(other.id);
     }
 
@@ -76,5 +88,5 @@ public abstract class AbstractEntity<ID extends DomainObjectId> implements Ident
     public String toString() {
         return String.format("%s[%s]", getClass().getSimpleName(), id);
     }
-    
+
 }
