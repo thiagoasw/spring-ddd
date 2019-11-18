@@ -3,7 +3,6 @@ package io.tasw;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import io.tasw.domain.business.BusinessId;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -33,15 +32,12 @@ public class SwaggerConfiguration {
 
     ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("Domain REST API :: Borrower")
-            .description("Domain REST Interface for Borrower Service.")
+            .title("Query REST API :: Borrower")
+            .description("Query REST Interface for Borrower Service.")
             .build();
     }
     
     Docket registerModelSubstitutes(Docket docket) {
-
-        docket.directModelSubstitute(BusinessId.class, String.class);
-
         return docket;
     }
 }

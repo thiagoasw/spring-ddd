@@ -6,44 +6,33 @@ import static org.hibernate.tool.schema.TargetType.STDOUT;
 import java.io.File;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.dialect.PostgreSQL10Dialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
+import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
+import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
 
-import lombok.experimental.UtilityClass;
+public abstract class CreateSchemaExport {
 
-@UtilityClass
-public class CreateSchemaExport {
-
-    enum RDBMS {
-        POSTGRESQL
-    }
-
-    static final RDBMS rdbms = RDBMS.POSTGRESQL;
-
-    public static void main(String[] args) {
+    protected void export() {
 
         Map<String, Object> settings = new HashMap<>();
-
-        switch (rdbms) {
-            case POSTGRESQL:
-                settings.put("hibernate.dialect", PostgreSQL10Dialect.class);
-                break;
-        }
-
+        settings.put("hibernate.dialect", PostgreSQL10Dialect.class);
         settings.put("hibernate.id.new_generator_mappings", false);
-        
+        settings.put("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName());
+        settings.put("hibernate.physical_naming_strategy", SpringPhysicalNamingStrategy.class.getName());
+
         StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder()
             .applySettings(settings)
             .build();
+        
         MetadataSources metadataSources = new MetadataSources(standardServiceRegistry);
-
-        Metadata metadata = metadataSources.buildMetadata();
+        getAnnotatedClasses().forEach(metadataSources::addAnnotatedClass);
 
         SchemaExport schemaExport = new SchemaExport();
         schemaExport.setFormat(true);
@@ -54,7 +43,9 @@ public class CreateSchemaExport {
         if (outputFile.exists()) outputFile.delete();
 
         schemaExport.setOutputFile(outputFile.getAbsolutePath());
-        schemaExport.createOnly(EnumSet.of(STDOUT, SCRIPT), metadata);
+        schemaExport.createOnly(EnumSet.of(STDOUT, SCRIPT), metadataSources.buildMetadata());
     }
 
+    protected abstract List<Class<?>> getAnnotatedClasses();
+    
 }

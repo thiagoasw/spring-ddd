@@ -3,9 +3,9 @@ package io.tasw.domain.business;
 import static java.util.Objects.requireNonNull;
 import static lombok.AccessLevel.PRIVATE;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import io.tasw.domain.business.event.BusinessCreated;
 import io.tasw.sk.domain.AbstractAggregateRoot;
 import io.tasw.sk.domain.DomainObjectId;
 import lombok.Getter;
@@ -22,7 +22,6 @@ public class Business extends AbstractAggregateRoot<BusinessId> {
 
     private static final long serialVersionUID = -4855808936576743013L;
 
-    @Column(nullable = false)
     private final String name;
 
     private final int totalEmployees;
@@ -48,24 +47,29 @@ public class Business extends AbstractAggregateRoot<BusinessId> {
         public Builder(String name) {
             this.name = name;
         }
-        
-        public Builder totalEmployees(int totalEmployees) {
-            this.totalEmployees = totalEmployees;
-            return this;
-        }
 
         public Builder id(BusinessId id) {
             this.id = id;
             return this;
         }
         
+        public Builder totalEmployees(int totalEmployees) {
+            this.totalEmployees = totalEmployees;
+            return this;
+        }
+
         public Business build() {
             return new Business(this);
         }
         
         public Business buildAsNew() {
+
             id = DomainObjectId.randomId(BusinessId.class);
-            return new Business(this);
+            
+            Business business = new Business(this);
+            business.registerEvent(BusinessCreated.from(business));
+            
+            return business;
         }
     }
 
