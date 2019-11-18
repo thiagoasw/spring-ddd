@@ -1,12 +1,12 @@
-package io.tasw.sk.ddd;
+package io.tasw.sk.domain;
 
+import static java.util.Collections.unmodifiableList;
+import static java.util.Objects.requireNonNull;
 import static lombok.AccessLevel.PROTECTED;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
@@ -59,7 +59,7 @@ public abstract class AbstractAggregateRoot<ID extends DomainObjectId> extends A
      */
     @NonNull
     protected void registerEvent(@NonNull DomainEvent event) {
-        Objects.requireNonNull(event, "event must not be null");
+        requireNonNull(event, "event must not be null");
         this.domainEvents.add(event);
     }
 
@@ -77,7 +77,7 @@ public abstract class AbstractAggregateRoot<ID extends DomainObjectId> extends A
      */
     @DomainEvents
     protected Collection<Object> domainEvents() {
-        return Collections.unmodifiableList(domainEvents);
+        return unmodifiableList(domainEvents);
     }
     
 }

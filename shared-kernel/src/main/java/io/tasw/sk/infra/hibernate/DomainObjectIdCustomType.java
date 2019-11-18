@@ -9,7 +9,7 @@ import org.hibernate.type.AbstractSingleColumnStandardBasicType;
 import org.hibernate.type.descriptor.sql.VarcharTypeDescriptor;
 import org.springframework.lang.NonNull;
 
-import io.tasw.sk.ddd.DomainObjectId;
+import io.tasw.sk.domain.DomainObjectId;
 
 /**
  * Hibernate custom type for a {@link DomainObjectId} subtype. You need this to be able to use {@link DomainObjectId}s

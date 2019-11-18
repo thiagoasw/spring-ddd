@@ -1,4 +1,4 @@
-package io.tasw.sk.ddd;
+package io.tasw.sk.domain;
 
 /**
  * Marker interface for value objects.

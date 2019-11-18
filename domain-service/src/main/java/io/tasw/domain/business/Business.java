@@ -6,8 +6,8 @@ import static lombok.AccessLevel.PRIVATE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import io.tasw.sk.ddd.AbstractAggregateRoot;
-import io.tasw.sk.ddd.DomainObjectId;
+import io.tasw.sk.domain.AbstractAggregateRoot;
+import io.tasw.sk.domain.DomainObjectId;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,9 +25,12 @@ public class Business extends AbstractAggregateRoot<BusinessId> {
     @Column(nullable = false)
     private final String name;
 
+    private final int totalEmployees;
+    
     private Business(Builder builder) {
         super(builder.id);
         name = requireNonNull(builder.name);
+        totalEmployees = builder.totalEmployees;
     }
 
     public static Builder builder(String name) {
@@ -39,9 +42,16 @@ public class Business extends AbstractAggregateRoot<BusinessId> {
         private BusinessId id;
         
         private String name;
+        
+        private int totalEmployees;
 
         public Builder(String name) {
             this.name = name;
+        }
+        
+        public Builder totalEmployees(int totalEmployees) {
+            this.totalEmployees = totalEmployees;
+            return this;
         }
 
         public Builder id(BusinessId id) {

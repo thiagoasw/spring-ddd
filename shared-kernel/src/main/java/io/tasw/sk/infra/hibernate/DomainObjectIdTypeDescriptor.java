@@ -8,7 +8,7 @@ import org.hibernate.type.descriptor.WrapperOptions;
 import org.hibernate.type.descriptor.java.AbstractTypeDescriptor;
 import org.springframework.lang.NonNull;
 
-import io.tasw.sk.ddd.DomainObjectId;
+import io.tasw.sk.domain.DomainObjectId;
 
 /**
  * Hibernate type descriptor for a {@link DomainObjectId} subtype. You typically don't need to subclass this.

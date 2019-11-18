@@ -1,13 +1,14 @@
-package io.tasw.sk.ddd;
+package io.tasw.sk.domain;
 
+import static java.lang.String.format;
 import static java.util.Objects.requireNonNull;
 import static lombok.AccessLevel.PROTECTED;
+import static org.springframework.data.util.ProxyUtils.getUserClass;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.springframework.data.util.ProxyUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
@@ -71,7 +72,7 @@ public abstract class AbstractEntity<ID extends DomainObjectId>
         if (obj == this)
             return true;
 
-        if (obj == null || !getClass().equals(ProxyUtils.getUserClass(obj)))
+        if (obj == null || !getClass().equals(getUserClass(obj)))
             return false;
 
         var other = (AbstractEntity<?>) obj;
@@ -86,7 +87,7 @@ public abstract class AbstractEntity<ID extends DomainObjectId>
 
     @Override
     public String toString() {
-        return String.format("%s[%s]", getClass().getSimpleName(), id);
+        return format("%s[%s]", getClass().getSimpleName(), id);
     }
 
 }

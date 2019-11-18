@@ -1,4 +1,4 @@
-package io.tasw.sk.ddd;
+package io.tasw.sk.domain;
 
 import java.time.Instant;
 

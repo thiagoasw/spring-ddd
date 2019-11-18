@@ -1,6 +1,6 @@
 package io.tasw.domain.business;
 
-import io.tasw.sk.ddd.DomainObjectId;
+import io.tasw.sk.domain.DomainObjectId;
 
 public class BusinessId extends DomainObjectId {
 
