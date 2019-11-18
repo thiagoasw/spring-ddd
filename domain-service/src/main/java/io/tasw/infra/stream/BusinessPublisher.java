@@ -22,7 +22,7 @@ public class BusinessPublisher {
 
     private final Source source;
 
-    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onBusinessCreatedEvent(BusinessCreated event) {
 
         LOGGER.trace(event.toString());

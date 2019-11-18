@@ -2,7 +2,7 @@ package io.tasw.domain.business;
 
 import io.tasw.sk.domain.DomainObjectId;
 
-public class BusinessId extends DomainObjectId {
+public final class BusinessId extends DomainObjectId {
 
     private static final long serialVersionUID = 5590592662599852427L;
 
@@ -10,4 +10,7 @@ public class BusinessId extends DomainObjectId {
         super(uuid);
     }
     
+    public static BusinessId from(String uuid) {
+        return new BusinessId(uuid);
+    }
 }
