@@ -28,7 +28,7 @@ public class BusinessService {
         
         Business business = Business.builder(form.getName())
             .totalEmployees(form.getTotalEmployees())
-        .buildAsNew();
+        .build();
         
         repository.save(business);
         

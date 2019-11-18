@@ -1,7 +1,5 @@
 package io.tasw.infra.stream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.support.MessageBuilder;
@@ -11,21 +9,21 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 import io.tasw.domain.business.event.BusinessCreated;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @AllArgsConstructor
 
 @Service
 @EnableBinding(value = Source.class)
 public class BusinessPublisher {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BusinessPublisher.class);
-
     private final Source source;
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onBusinessCreatedEvent(BusinessCreated event) {
 
-        LOGGER.trace(event.toString());
+        log.trace(event);
 
         source.output().send(
             MessageBuilder.withPayload(event)

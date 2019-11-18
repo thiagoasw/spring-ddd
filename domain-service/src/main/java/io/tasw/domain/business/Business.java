@@ -59,11 +59,9 @@ public class Business extends AbstractAggregateRoot<BusinessId> {
         }
 
         public Business build() {
-            return new Business(this);
-        }
         
-        public Business buildAsNew() {
-
+            // @Valid
+        
             id = DomainObjectId.randomId(BusinessId.class);
             
             Business business = new Business(this);

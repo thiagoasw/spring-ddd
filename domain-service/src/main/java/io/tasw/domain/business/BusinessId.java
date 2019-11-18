@@ -9,8 +9,5 @@ public final class BusinessId extends DomainObjectId {
     public BusinessId(String uuid) {
         super(uuid);
     }
-    
-    public static BusinessId from(String uuid) {
-        return new BusinessId(uuid);
-    }
+
 }
