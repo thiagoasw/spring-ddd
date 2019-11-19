@@ -1,7 +1,7 @@
 package io.tasw.domain.business;
 
 import static java.util.Objects.requireNonNull;
-import static lombok.AccessLevel.PACKAGE;
+import static lombok.AccessLevel.PRIVATE;
 
 import javax.persistence.Entity;
 
@@ -19,7 +19,7 @@ import lombok.ToString;
  */
 @Getter
 @ToString
-@NoArgsConstructor(access = PACKAGE, force = true)
+@NoArgsConstructor(access = PRIVATE, force = true)
 
 @Entity
 public class Business extends AbstractAggregateRoot<BusinessId> {
