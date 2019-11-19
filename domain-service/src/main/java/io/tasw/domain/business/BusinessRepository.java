@@ -2,12 +2,12 @@ package io.tasw.domain.business;
 
 import java.util.Optional;
 
-public interface BusinessRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-    Business save(Business entity);
+@Repository
+public interface BusinessRepository extends JpaRepository<Business, BusinessId> {
 
-    Optional<Business> getOne(BusinessId id);
-  
     Optional<Business> findOneByName(String name);
-    
+
 }

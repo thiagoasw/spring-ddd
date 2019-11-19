@@ -23,16 +23,17 @@ import lombok.NoArgsConstructor;
  */
 @MappedSuperclass
 @NoArgsConstructor(access = PROTECTED)
-public abstract class AbstractEntity<ID extends DomainObjectId> implements IdentifiableDomainObject<ID> {
+public abstract class AbstractEntity<ID extends DomainObjectId> implements IdentifiableDomainObject<ID>, ConcurrentDomainObject {
 
     private static final long serialVersionUID = -3123692781951371785L;
 
     @Id
-    @JsonProperty("id")
+    @JsonProperty
     private ID id;
 
     @Version
     @Nullable
+    @JsonProperty
     private Long version;
 
     /**
@@ -60,6 +61,8 @@ public abstract class AbstractEntity<ID extends DomainObjectId> implements Ident
         return id;
     }
 
+    @Override
+    @NonNull
     public Long version() {
         return version;
     }

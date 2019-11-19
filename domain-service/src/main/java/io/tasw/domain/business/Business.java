@@ -1,9 +1,11 @@
 package io.tasw.domain.business;
 
 import static java.util.Objects.requireNonNull;
-import static lombok.AccessLevel.PRIVATE;
+import static lombok.AccessLevel.PACKAGE;
 
 import javax.persistence.Entity;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.tasw.domain.business.event.BusinessCreated;
 import io.tasw.sk.domain.AbstractAggregateRoot;
@@ -17,17 +19,19 @@ import lombok.ToString;
  */
 @Getter
 @ToString
-@NoArgsConstructor(access = PRIVATE, force = true)
+@NoArgsConstructor(access = PACKAGE, force = true)
 
 @Entity
 public class Business extends AbstractAggregateRoot<BusinessId> {
 
     private static final long serialVersionUID = -4855808936576743013L;
 
+    @JsonProperty
     private final String name;
 
+    @JsonProperty
     private final int totalEmployees;
-    
+
     private Business(Builder builder) {
         super(builder.id);
         name = requireNonNull(builder.name);

@@ -4,14 +4,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
 import lombok.Data;
 
 public interface BusinessForms {
 
     @Data
-    @Builder
-    public static final class CreateBusiness {
+    public final class CreateBusiness {
 
         @NotBlank
         @ApiModelProperty(required = true)

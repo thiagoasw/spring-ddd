@@ -1,7 +1,12 @@
 package io.tasw.app;
 
+import static java.lang.String.format;
+import static java.util.Objects.requireNonNull;
 import static javax.persistence.LockModeType.PESSIMISTIC_READ;
 
+import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.springframework.data.jpa.repository.Lock;
@@ -38,6 +43,19 @@ public class BusinessService {
         repository.save(business);
         
         return business.id();
+    }
+    
+    @NonNull
+    @Transactional(readOnly = true)
+    public List<Business> list() {
+        return repository.findAll();
+    }
+
+    @NonNull
+    @Transactional(readOnly = true)
+    public Business get(@NonNull BusinessId id) {
+        return repository.findById(requireNonNull(id))
+            .orElseThrow(() -> new EntityNotFoundException(format("Not found any Business with code %s.", id.toUUID())));
     }
     
 }
