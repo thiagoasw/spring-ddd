@@ -11,7 +11,7 @@ public interface BusinessForms {
 
     @Data
     @Builder
-    public static final class BusinessForm {
+    public static final class CreateBusiness {
 
         @NotBlank
         @ApiModelProperty(required = true)

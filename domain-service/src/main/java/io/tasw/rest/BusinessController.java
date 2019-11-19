@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.tasw.app.BusinessService;
-import io.tasw.app.form.BusinessForms.BusinessForm;
+import io.tasw.app.form.BusinessForms.CreateBusiness;
 import io.tasw.domain.business.BusinessId;
 import lombok.AllArgsConstructor;
 
@@ -23,9 +23,9 @@ public class BusinessController {
     private final BusinessService service;
  
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> create(@RequestBody BusinessForm form) {
+    ResponseEntity<Void> create(@RequestBody CreateBusiness form) {
         
-        BusinessId id = service.create(form);
+        BusinessId id = service.handle(form);
         
         return ResponseEntity.created(
             ServletUriComponentsBuilder

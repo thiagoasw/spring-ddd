@@ -10,11 +10,13 @@ import io.tasw.sk.domain.AbstractAggregateRoot;
 import io.tasw.sk.domain.DomainObjectId;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * Aggregate root representing a business.
  */
 @Getter
+@ToString
 @NoArgsConstructor(access = PRIVATE, force = true)
 
 @Entity
