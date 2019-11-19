@@ -36,5 +36,5 @@ public class ExceptionAdvice {
         return ResponseEntity.status(BAD_REQUEST)
             .body(builder.build());
     }
-    
+
 }

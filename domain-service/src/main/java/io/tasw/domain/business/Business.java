@@ -45,9 +45,9 @@ public class Business extends AbstractAggregateRoot<BusinessId> {
     public static class Builder {
 
         private BusinessId id;
-        
+
         private String name;
-        
+
         private int totalEmployees;
 
         public Builder(String name) {
@@ -66,10 +66,8 @@ public class Business extends AbstractAggregateRoot<BusinessId> {
 
         public Business build() {
         
-            // @Valid
-        
             id = DomainObjectId.randomId(BusinessId.class);
-            
+
             Business business = new Business(this);
             business.registerEvent(BusinessCreated.from(business));
             

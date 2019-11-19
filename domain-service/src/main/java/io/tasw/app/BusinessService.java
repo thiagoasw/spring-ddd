@@ -36,13 +36,17 @@ public class BusinessService {
     public BusinessId handle(@NonNull @Valid CreateBusiness form) {
         
         Business business = repository.findOneByName(form.name())
-            .orElse(Business.builder(form.name())
-                    .totalEmployees(form.totalEmployees())
-                .build());
+            .orElse(toDomainModel(form));
         
         repository.save(business);
         
         return business.id();
+    }
+
+    Business toDomainModel(@NonNull CreateBusiness form) {
+        return Business.builder(form.name())
+            .totalEmployees(form.totalEmployees())
+        .build();
     }
     
     @NonNull
@@ -57,5 +61,5 @@ public class BusinessService {
         return repository.findById(requireNonNull(id))
             .orElseThrow(() -> new EntityNotFoundException(format("Not found any Business with code %s.", id.toUUID())));
     }
-    
+
 }
