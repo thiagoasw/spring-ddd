@@ -12,8 +12,6 @@ import javax.persistence.Version;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.NoArgsConstructor;
 
 /**
@@ -25,15 +23,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = PROTECTED)
 public abstract class AbstractEntity<ID extends DomainObjectId> implements IdentifiableDomainObject<ID>, ConcurrentDomainObject {
 
-    private static final long serialVersionUID = -3123692781951371785L;
-
     @Id
-    @JsonProperty
     private ID id;
 
     @Version
     @Nullable
-    @JsonProperty
     private Long version;
 
     /**
@@ -55,14 +49,14 @@ public abstract class AbstractEntity<ID extends DomainObjectId> implements Ident
         this.id = requireNonNull(id, "id must not be null");
     }
 
-    @Override
     @NonNull
+    @Override
     public ID id() {
         return id;
     }
 
-    @Override
     @NonNull
+    @Override
     public Long version() {
         return version;
     }

@@ -28,8 +28,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = PROTECTED)
 public abstract class AbstractAggregateRoot<ID extends DomainObjectId> extends AbstractEntity<ID> {
 
-    private static final long serialVersionUID = 6732931789436058616L;
-
     @Transient
     @JsonIgnore
     private List<DomainEvent> domainEvents = new ArrayList<>();

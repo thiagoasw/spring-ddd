@@ -2,6 +2,7 @@ package io.tasw.sk.domain;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -14,9 +15,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Base class for value objects that are used as identifiers for {@link IdentifiableDomainObject}s. These are
  * essentially UUID-wrappers.
  */
-public abstract class DomainObjectId implements ValueObject {
+public abstract class DomainObjectId implements ValueObject, Serializable {
 
-    private static final long serialVersionUID = 6493750573405978912L;
+    private static final long serialVersionUID = 5308817818523849761L;
 
     @JsonValue
     private final String uuid;

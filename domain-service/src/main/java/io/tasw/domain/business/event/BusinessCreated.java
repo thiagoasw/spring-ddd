@@ -16,8 +16,6 @@ import lombok.ToString;
 @Builder(access = PRIVATE)
 public class BusinessCreated implements DomainEvent {
 
-    private static final long serialVersionUID = -251277531938559464L;
-
     private final BusinessId id;
     
     private final String name;

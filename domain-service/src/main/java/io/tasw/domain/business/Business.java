@@ -22,8 +22,6 @@ import lombok.ToString;
 @Entity
 public class Business extends AbstractAggregateRoot<BusinessId> {
 
-    private static final long serialVersionUID = -4855808936576743013L;
-
     private final String name;
 
     private final int totalEmployees;
