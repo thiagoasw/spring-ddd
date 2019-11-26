@@ -1,4 +1,4 @@
-package io.tasw.sk.infra.rest;
+package io.tasw.sk.infra.rest.advice;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.tasw.sk.infra.rest.ExceptionResponse.ConstraintViolationResponse;
-import io.tasw.sk.infra.rest.ExceptionResponse.ConstraintViolationResponse.ConstraintViolationResponseBuilder;
+import io.tasw.sk.infra.rest.advice.ExceptionResponse.ConstraintViolationResponse;
+import io.tasw.sk.infra.rest.advice.ExceptionResponse.ConstraintViolationResponse.ConstraintViolationResponseBuilder;
 
 @ControllerAdvice(annotations = RestController.class)
 public class ExceptionAdvice {

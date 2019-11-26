@@ -1,4 +1,4 @@
-package io.tasw.sk.infra.rest;
+package io.tasw.sk.infra.rest.advice;
 
 import static lombok.AccessLevel.PRIVATE;
 
