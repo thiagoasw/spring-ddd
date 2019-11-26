@@ -5,8 +5,6 @@ import static lombok.AccessLevel.PRIVATE;
 
 import javax.persistence.Entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.tasw.domain.business.event.BusinessCreated;
 import io.tasw.sk.domain.AbstractAggregateRoot;
 import io.tasw.sk.domain.DomainObjectId;
@@ -26,10 +24,8 @@ public class Business extends AbstractAggregateRoot<BusinessId> {
 
     private static final long serialVersionUID = -4855808936576743013L;
 
-    @JsonProperty
     private final String name;
 
-    @JsonProperty
     private final int totalEmployees;
 
     private Business(Builder builder) {

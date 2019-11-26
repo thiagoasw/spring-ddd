@@ -6,6 +6,16 @@ spring:
   jmx:
     enabled: false
 
+  jackson:
+    default-property-inclusion: non-empty
+    mapper:
+      accept-case-insensitive-properties: true
+    visibility:
+      field: any
+      getter: none
+      setter: none
+      is-getter: none
+
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/domain

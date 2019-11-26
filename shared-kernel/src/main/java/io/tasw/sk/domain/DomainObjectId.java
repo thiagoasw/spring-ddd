@@ -18,6 +18,7 @@ public abstract class DomainObjectId implements ValueObject {
 
     private static final long serialVersionUID = 6493750573405978912L;
 
+    @JsonValue
     private final String uuid;
 
     @JsonCreator
@@ -41,7 +42,6 @@ public abstract class DomainObjectId implements ValueObject {
     /**
      * Returns the ID as a UUID string.
      */
-    @JsonValue
     @NonNull
     public String toUUID() {
         return uuid;
