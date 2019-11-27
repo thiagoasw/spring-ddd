@@ -1,5 +1,6 @@
 package io.tasw.domain.business;
 
+import static io.tasw.sk.domain.DomainObjectId.randomId;
 import static java.util.Objects.requireNonNull;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -7,7 +8,6 @@ import javax.persistence.Entity;
 
 import io.tasw.domain.business.event.BusinessCreated;
 import io.tasw.sk.domain.AbstractAggregateRoot;
-import io.tasw.sk.domain.DomainObjectId;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -60,7 +60,7 @@ public class Business extends AbstractAggregateRoot<BusinessId> {
 
         public Business build() {
         
-            id = DomainObjectId.randomId(BusinessId.class);
+            id = randomId(BusinessId.class);
 
             Business business = new Business(this);
             business.registerEvent(BusinessCreated.from(business));

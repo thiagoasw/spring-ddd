@@ -3,6 +3,7 @@ package io.tasw.app;
 import static java.lang.String.format;
 import static java.util.Objects.requireNonNull;
 import static javax.persistence.LockModeType.PESSIMISTIC_READ;
+import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
 import java.util.List;
 
@@ -12,7 +13,6 @@ import javax.validation.Valid;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
@@ -26,7 +26,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @Validated
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation = REQUIRES_NEW)
 public class BusinessService {
 
     private final BusinessRepository repository;

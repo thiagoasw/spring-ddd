@@ -21,7 +21,7 @@ class DomainEventAppender {
     private final DomainEventService service;
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
-    public void onDomainEvent(@NonNull DomainEvent domainEvent) {
+    public void on(@NonNull DomainEvent domainEvent) {
         service.append(domainEvent);
     }
     

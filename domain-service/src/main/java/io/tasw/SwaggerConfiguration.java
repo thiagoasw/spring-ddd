@@ -1,9 +1,24 @@
 package io.tasw;
 
+import static io.tasw.MoneySupportConfiguration.AMOUNT_FIELD_NAME;
+import static io.tasw.MoneySupportConfiguration.CURRENCY_FIELD_NAME;
+
+import java.math.BigDecimal;
+
+import javax.money.MonetaryAmount;
+
+import org.javamoney.moneta.FastMoney;
+import org.javamoney.moneta.Money;
+import org.javamoney.moneta.RoundedMoney;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.tasw.domain.account.AccountId;
 import io.tasw.domain.business.BusinessId;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -43,8 +58,27 @@ public class SwaggerConfiguration {
     
     Docket registerModelSubstitutes(Docket docket) {
 
+        docket.directModelSubstitute(AccountId.class, String.class);
         docket.directModelSubstitute(BusinessId.class, String.class);
 
+        docket.directModelSubstitute(Money.class, MonetaryAmountApiRepresentation.class);
+        docket.directModelSubstitute(FastMoney.class, MonetaryAmountApiRepresentation.class);
+        docket.directModelSubstitute(RoundedMoney.class, MonetaryAmountApiRepresentation.class);
+        docket.directModelSubstitute(MonetaryAmount.class, MonetaryAmountApiRepresentation.class);
+        
         return docket;
+    }
+
+    @ApiModel("MonetaryAmount")
+    interface MonetaryAmountApiRepresentation {
+
+        @JsonProperty
+        @ApiModelProperty(name = AMOUNT_FIELD_NAME, required = true)
+        BigDecimal value();
+
+        @JsonProperty
+        @ApiModelProperty(name = CURRENCY_FIELD_NAME, required = true, allowableValues = "BRL")
+        String currency();
+
     }
 }

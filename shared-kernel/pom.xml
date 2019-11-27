@@ -44,6 +44,13 @@
             <optional>true</optional>
         </dependency>
         
+        <!-- Reference implementation from javax.money-api -->
+        <dependency>
+            <groupId>org.javamoney</groupId>
+            <artifactId>moneta</artifactId>
+            <type>pom</type>
+        </dependency>
+        
         <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>

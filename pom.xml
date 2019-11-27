@@ -26,6 +26,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <javax.money-api.ri.version>1.3</javax.money-api.ri.version>
+        <jackson-money.version>1.1.1</jackson-money.version>
+
         <spring-fox.version>2.9.2</spring-fox.version>
         <spring-cloud-stream-rabbit.version>3.0.0.RELEASE</spring-cloud-stream-rabbit.version>
 
@@ -46,6 +49,20 @@
                 <version>${spring-cloud-stream-rabbit.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            
+            <!-- Reference implementation from javax.money-api -->
+            <dependency>
+                <groupId>org.javamoney</groupId>
+                <artifactId>moneta</artifactId>
+                <version>${javax.money-api.ri.version}</version>
+                <type>pom</type>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.zalando</groupId>
+                <artifactId>jackson-datatype-money</artifactId>
+                <version>${jackson-money.version}</version>
             </dependency>
 
             <!-- Swagger -->
@@ -101,22 +118,6 @@
                     <forkCount>2</forkCount>
                     <reuseForks>true</reuseForks>
                 </configuration>
-            </plugin>
-            
-            <plugin>
-                <groupId>org.hibernate.orm.tooling</groupId>
-                <artifactId>hibernate-enhance-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <failOnError>true</failOnError>
-                            <enableLazyInitialization>true</enableLazyInitialization>
-                        </configuration>
-                        <goals>
-                            <goal>enhance</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
         </plugins>
